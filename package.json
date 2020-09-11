@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "0.1.6",
     "expo": "~37.0.3",
     "expo-font": "~8.1.0",
     "react": "~16.9.0",
@@ -21,13 +22,12 @@
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.3.9",
     "react-navigation-drawer": "^2.5.0",
-    "react-navigation-header-buttons": "^4.0.2",
+    "react-navigation-header-buttons": "^4.0.3",
     "react-navigation-material-bottom-tabs": "^2.3.0",
     "react-navigation-stack": "^2.4.0",
     "react-navigation-tabs": "^2.9.0",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5",
-    "@react-native-community/masked-view": "0.1.6"
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
