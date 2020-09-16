@@ -11,6 +11,7 @@ import * as productActions from '../../store/actions/products';
 
 const ProductOverviewScreen = props => {
     const [isLoading, setIsLoading] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
     const [error, setError] = useState();
 
     const products = useSelector(state => state.products.availableProducts);
@@ -18,13 +19,13 @@ const ProductOverviewScreen = props => {
 
     const loadProducts = useCallback(async () => {
         setError(null);
-        setIsLoading(true);
+        setIsRefreshing(true);
         try {
             await dispatch(productActions.fetchProducts());
         } catch (err) {
             setError(err.message);
         }
-        setIsLoading(false);
+        setIsRefreshing(false);
     }, [dispatch, setIsLoading, setError]);
     // We can omit setIsLoading and setError because they will never be created again
 
@@ -37,7 +38,10 @@ const ProductOverviewScreen = props => {
     }, [loadProducts]);
 
     useEffect(() => {
-        loadProducts();
+        setIsLoading(true);
+        loadProducts().then(()=>{
+            setIsLoading(false);
+        })
     }, [dispatch, loadProducts]);
 
     const onSelectHandler = (id, title) => {
@@ -76,6 +80,8 @@ const ProductOverviewScreen = props => {
 
     return (
         <FlatList
+            refreshing={isRefreshing}
+            onRefresh={loadProducts}
             keyExtractor={(item, index) => item.id}
             data={products}
             renderItem={
